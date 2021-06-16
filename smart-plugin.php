@@ -19,6 +19,17 @@ class SmartdeliveryPlugin
   {
     add_action("init", [$this, "custom_post_type"]);
   }
+
+  function register_admin_scripts()
+  {
+    add_action("admin_enqueue_scripts", [$this, "enqueue"]);
+  }
+
+  function register_public_scripts()
+  {
+    add_action("wp_enqueue_scripts", [$this, "enqueue"]);
+  }
+
   function activate()
   {
     $this->custom_post_type();
@@ -32,12 +43,22 @@ class SmartdeliveryPlugin
 
   function custom_post_type()
   {
-    register_post_type("contact", ["public" => true, "label" => "Contacts"]);
+    register_post_type("product", ["public" => true, "label" => "Products"]);
+  }
+
+  function enqueue()
+  {
+    wp_enqueue_style("smartstyle", plugins_url("/assets/styles.css", __FILE__));
+    wp_enqueue_script(
+      "smartscript",
+      plugins_url("/assets/script.js", __FILE__)
+    );
   }
 }
 
 if (class_exists("SmartdeliveryPlugin")) {
   $SmartdeliveryPlugin = new SmartdeliveryPlugin();
+  $SmartdeliveryPlugin->register_admin_scripts();
 }
 
 register_activation_hook(__FILE__, [$SmartdeliveryPlugin, "activate"]);
