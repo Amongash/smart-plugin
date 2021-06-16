@@ -17,7 +17,7 @@ class SmartdeliveryPlugin
 {
   function __construct()
   {
-    add_action("init", [$this, "custom_post_type"]);
+    $this->create_post_type();
   }
 
   function register_admin_scripts()
@@ -28,6 +28,11 @@ class SmartdeliveryPlugin
   function register_public_scripts()
   {
     add_action("wp_enqueue_scripts", [$this, "enqueue"]);
+  }
+
+  protected function create_post_type()
+  {
+    add_action("init", [$this, "custom_post_type"]);
   }
 
   function activate()
