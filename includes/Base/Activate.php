@@ -3,7 +3,9 @@
  * @package SmartdeliveryPlugin
  */
 
-class SmartdeliveryPluginActivate
+namespace Includes\Base;
+
+class Activate
 {
   public static function activate()
   {

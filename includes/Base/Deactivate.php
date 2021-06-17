@@ -3,7 +3,9 @@
  * @package SmartdeliveryPlugin
  */
 
-class SmartdeliveryPluginDeactivate
+namespace Includes\Base;
+
+class Deactivate
 {
   public static function deactivate()
   {

@@ -1,0 +1,19 @@
+{
+  "name": "amongash/smart-plugin",
+  "description": "Custom plugin for smartdelivery",
+  "type": "project",
+  "license": "GPL",
+  "authors": [
+    {
+      "name": "amongash",
+      "email": "amongash08@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Includes\\": "./includes"
+    }
+  }
+}
