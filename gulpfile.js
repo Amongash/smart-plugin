@@ -41,59 +41,59 @@ var phpWatch = "./**/*.php";
 
 // Tasks
 function browser_sync(done) {
-  browserSync.init({
-    proxy: projectURL,
-    injectChanges: true,
-    open: false,
-  });
-  done();
+	browserSync.init({
+		proxy: projectURL,
+		injectChanges: true,
+		open: false,
+	});
+	done();
 }
 
 function style(done) {
-  _src(styleSRC)
-    .pipe(init())
-    .pipe(
-      sass({
-        errLogToConsole: true,
-        outputStyle: "compressed",
-      })
-    )
-    .on("error", console.error.bind(console))
-    .pipe(autoprefixer())
-    .pipe(write(mapURL))
-    .pipe(dest(styleURL))
-    .pipe(browserSync.stream());
-  done();
+	src(styleSRC)
+		.pipe(sourcemaps.init())
+		.pipe(
+			sass({
+				errLogToConsole: true,
+				outputStyle: "compressed",
+			})
+		)
+		.on("error", console.error.bind(console))
+		.pipe(autoprefixer())
+		.pipe(sourcemaps.write(mapURL))
+		.pipe(dest(styleURL))
+		.pipe(browserSync.stream());
+	done();
 }
 
 function js(done) {
-  browserify({
-    entries: [jsSRC],
-  })
-    .transform(babelify, { presets: ["@babel/preset-env"] })
-    .bundle()
-    .pipe(source("script.js"))
-    .pipe(buffer())
-    .pipe(gulpif(has("production"), stripDebug()))
-    .pipe(init({ loadMaps: true }))
-    .pipe(uglify())
-    .pipe(write("."))
-    .pipe(dest(jsURL))
-    .pipe(browserSync.stream());
-  done();
+	browserify({
+		entries: [jsSRC],
+	})
+		.transform(babelify, { presets: ["@babel/preset-env"] })
+		.bundle()
+		.pipe(source("script.js"))
+		.pipe(buffer())
+		.pipe(gulpif(options.has("production"), stripDebug()))
+		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(uglify())
+		.pipe(sourcemaps.write("."))
+		.pipe(dest(jsURL))
+		.pipe(browserSync.stream());
+	done();
 }
 
 function triggerPlumber(src, url) {
-  return _src(src).pipe(plumber()).pipe(dest(url));
+	return src(src).pipe(plumber()).pipe(dest(url));
 }
 
 function watch_files() {
-  watch(phpWatch, reload);
-  watch(styleWatch, style);
-  watch(jsWatch, series(js, reload));
-  src(jsURL + "script.js").pipe(
-    notify({ message: "Gulp is Watching, Happy Coding!" })
-  );
+	watch(phpWatch, reload);
+	watch(styleWatch, style);
+	watch(jsWatch, series(js, reload));
+	src(jsURL + "script.js").pipe(
+		notify({ message: "Gulp is Watching, Happy Coding!" })
+	);
 }
 
 task("style", style);
