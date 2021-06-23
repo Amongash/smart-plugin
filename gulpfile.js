@@ -1,13 +1,11 @@
 // Load Gulp...of course
-var gulp = require("gulp");
+const { src, dest, task, watch, series, parallel } = require("gulp");
 
 // CSS related plugins
 var sass = require("gulp-sass");
 var autoprefixer = require("gulp-autoprefixer");
-var minifycss = require("gulp-uglifycss");
 
 // JS related plugins
-var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 var babelify = require("babelify");
 var browserify = require("browserify");
@@ -51,10 +49,9 @@ function browser_sync(done) {
   done();
 }
 
-function css(done) {
-  gulp
-    .src(styleSRC)
-    .pipe(sourcemaps.init())
+function style(done) {
+  _src(styleSRC)
+    .pipe(init())
     .pipe(
       sass({
         errLogToConsole: true,
@@ -63,8 +60,8 @@ function css(done) {
     )
     .on("error", console.error.bind(console))
     .pipe(autoprefixer())
-    .pipe(sourcemaps.write(mapURL))
-    .pipe(gulp.dest(styleURL))
+    .pipe(write(mapURL))
+    .pipe(dest(styleURL))
     .pipe(browserSync.stream());
   done();
 }
@@ -77,29 +74,29 @@ function js(done) {
     .bundle()
     .pipe(source("script.js"))
     .pipe(buffer())
-    .pipe(gulpif(options.has("production"), stripDebug()))
-    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(gulpif(has("production"), stripDebug()))
+    .pipe(init({ loadMaps: true }))
     .pipe(uglify())
-    .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest(jsURL))
+    .pipe(write("."))
+    .pipe(dest(jsURL))
     .pipe(browserSync.stream());
   done();
 }
 
 function triggerPlumber(src, url) {
-  return gulp.src(src).pipe(plumber()).pipe(gulp.dest(url));
+  return _src(src).pipe(plumber()).pipe(dest(url));
 }
 
 function watch_files() {
-  gulp.watch(phpWatch, reload);
-  gulp.watch(styleWatch, css);
-  gulp.watch(jsWatch, gulp.series(js, reload));
-  gulp
-    .src(jsURL + "script.js")
-    .pipe(notify({ message: "Gulp is Watching, Happy Coding!" }));
+  watch(phpWatch, reload);
+  watch(styleWatch, style);
+  watch(jsWatch, series(js, reload));
+  src(jsURL + "script.js").pipe(
+    notify({ message: "Gulp is Watching, Happy Coding!" })
+  );
 }
 
-gulp.task("css", css);
-gulp.task("js", js);
-gulp.task("default", gulp.parallel(css, js));
-gulp.task("watch", gulp.series(watch_files, browser_sync));
+task("style", style);
+task("js", js);
+task("default", parallel(style, js));
+task("watch", series(watch_files, browser_sync));

@@ -28,7 +28,7 @@ class Enqueue extends BaseController
   {
     wp_enqueue_style(
       "smart-style-admin",
-      $this->plugin_url . "assets/admin/styles.css"
+      $this->plugin_url . "assets/admin/style.css"
     );
     wp_enqueue_script(
       "smart-script-admin",
@@ -38,7 +38,7 @@ class Enqueue extends BaseController
 
   function enqueue_public()
   {
-    wp_enqueue_style("smart-style", $this->plugin_url . "assets/styles.css");
+    wp_enqueue_style("smart-style", $this->plugin_url . "assets/style.css");
     wp_enqueue_script("smart-script", $this->plugin_url . "assets/script.js");
   }
 }
