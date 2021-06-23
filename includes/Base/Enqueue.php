@@ -27,28 +27,18 @@ class Enqueue extends BaseController
   function enqueue_admin()
   {
     wp_enqueue_style(
-      "smartstyle",
-      $this->plugin_url . "/assets/admin/styles.css",
-      __FILE__
+      "smart-style-admin",
+      $this->plugin_url . "assets/admin/styles.css"
     );
     wp_enqueue_script(
-      "smartscript",
-      $this->plugin_url . "/assets/admin/script.js",
-      __FILE__
+      "smart-script-admin",
+      $this->plugin_url . "assets/admin/script.js"
     );
   }
 
   function enqueue_public()
   {
-    wp_enqueue_style(
-      "smartstyle",
-      $this->plugin_url . "/assets/styles.css",
-      __FILE__
-    );
-    wp_enqueue_script(
-      "smartscript",
-      $this->plugin_url . "/assets/script.js",
-      __FILE__
-    );
+    wp_enqueue_style("smart-style", $this->plugin_url . "assets/styles.css");
+    wp_enqueue_script("smart-script", $this->plugin_url . "assets/script.js");
   }
 }
