@@ -1,0 +1,59 @@
+{
+  "name": "smart-plugin",
+  "version": "1.0.0",
+  "description": "Smart delivery plugin",
+  "author": "Amongash (https://github.com/amongash)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amongash/"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "PHP",
+    "composer",
+    "gulp",
+    "es6",
+    "scss"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.5",
+    "babelify": "^10.0.0",
+    "browser-sync": "^2.18.13",
+    "browserify": "^17.0.0",
+    "browserify-shim": "^3.8.14",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-if": "^3.0.0",
+    "gulp-notify": "^4.0.0",
+    "gulp-options": "^1.1.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-strip-debug": "^4.0.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-uglifycss": "^1.0.9",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "jquery": "./node_modules/jquery/dist/jquery.js"
+  },
+  "browserify-shim": {
+    "jquery": "$"
+  },
+  "license": "GPL-3.0"
+}
