@@ -10,7 +10,7 @@ use Includes\Api\SettingsApi;
 use Includes\Api\Callbacks\AdminCallbacks;
 use Includes\Api\Callbacks\ManagerCallbacks;
 
-class Admin extends BaseController
+class Dashboard extends BaseController
 {
 	public $settings;
 	public $callbacks;
