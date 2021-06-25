@@ -74,14 +74,11 @@ class Admin extends BaseController
 
 	public function setSettings()
 	{
-		$args = [];
-		foreach ($this->managers as $manager) {
-			$args[] = [
-				"option_group" => "smart_plugin_settings",
-				"option_name" => $manager,
-				"callback" => [$this->callbacks_mngr, "checkboxSanitize"],
-			];
-		}
+		$args[] = [
+			"option_group" => "smart_plugin_settings",
+			"option_name" => "smart_plugin",
+			"callback" => [$this->callbacks_mngr, "checkboxSanitize"],
+		];
 
 		$this->settings->setSettings($args);
 	}
@@ -109,7 +106,11 @@ class Admin extends BaseController
 				"callback" => [$this->callbacks_mngr, "checkboxField"],
 				"page" => "smart_plugin",
 				"section" => "smart_admin_index",
-				"args" => ["label_for" => $key, "class" => "ui-toggle"],
+				"args" => [
+					"option_name" => "smart_plugin",
+					"label_for" => $key,
+					"class" => "ui-toggle",
+				],
 			];
 		}
 
