@@ -16,7 +16,7 @@ class Dashboard extends BaseController
 	public $callbacks;
 	public $callbacks_mngr;
 	public $pages = [];
-	public $subpages = [];
+	// public $subpages = [];
 
 	public function register()
 	{
@@ -24,14 +24,14 @@ class Dashboard extends BaseController
 		$this->callbacks = new AdminCallbacks();
 		$this->callbacks_mngr = new ManagerCallbacks();
 		$this->setPages();
-		$this->setSubpages();
+		// $this->setSubpages();
 		$this->setSettings();
 		$this->setSections();
 		$this->setFields();
 		$this->settings
 			->addPages($this->pages)
 			->withSubPage("Dashboard")
-			->addSubpages($this->subpages)
+
 			->register();
 	}
 
@@ -50,27 +50,27 @@ class Dashboard extends BaseController
 		];
 	}
 
-	public function setSubpages()
-	{
-		$this->subpages = [
-			[
-				"parent_slug" => "smart_plugin",
-				"page_title" => "Custom Post Types",
-				"menu_title" => "CPT",
-				"capability" => "manage_options",
-				"menu_slug" => "smart_plugin_cpt",
-				"callback" => [$this->callbacks, "adminDashboard"],
-			],
-			[
-				"parent_slug" => "smart_plugin",
-				"page_title" => "Custom Taxonomies",
-				"menu_title" => "Taxonomies",
-				"capability" => "manage_options",
-				"menu_slug" => "smart_plugin_taxonomies",
-				"callback" => [$this->callbacks, "adminTaxonomies"],
-			],
-		];
-	}
+	// public function setSubpages()
+	// {
+	// 	$this->subpages = [
+	// 		[
+	// 			"parent_slug" => "smart_plugin",
+	// 			"page_title" => "Custom Post Types",
+	// 			"menu_title" => "CPT",
+	// 			"capability" => "manage_options",
+	// 			"menu_slug" => "smart_plugin_cpt",
+	// 			"callback" => [$this->callbacks, "adminDashboard"],
+	// 		],
+	// 		[
+	// 			"parent_slug" => "smart_plugin",
+	// 			"page_title" => "Custom Taxonomies",
+	// 			"menu_title" => "Taxonomies",
+	// 			"capability" => "manage_options",
+	// 			"menu_slug" => "smart_plugin_taxonomies",
+	// 			"callback" => [$this->callbacks, "adminTaxonomies"],
+	// 		],
+	// 	];
+	// }
 
 	public function setSettings()
 	{
