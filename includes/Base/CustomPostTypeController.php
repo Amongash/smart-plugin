@@ -13,6 +13,7 @@ class CustomPostTypeController extends BaseController
 {
 	public $callbacks;
 	public $subpages = [];
+	public $custom_post_types = [];
 
 	public function register()
 	{
@@ -27,16 +28,44 @@ class CustomPostTypeController extends BaseController
 		$this->setSubpages();
 		$this->settings->addSubpages($this->subpages)->register();
 
-		add_action("init", [$this, "activate"]);
+		$this->storeCustomPostTypes();
+		if (!empty($this->custom_post_types)) {
+			add_action("init", [$this, "registerCustomPostTypes"]);
+		}
 	}
 
-	public function activate()
+	public function storeCustomPostTypes()
 	{
-		register_post_type("smart_products", [
-			"labels" => ["name" => "Products", "singular_name" => "Product"],
-			"public" => true,
-			"has_archive" => true,
-		]);
+		$this->custom_post_types = [
+			[
+				"post_type" => "smart_products",
+				"name" => "Products",
+				"singular_name" => "Product",
+				"public" => true,
+				"has_archive" => true,
+			],
+			[
+				"post_type" => "smart_orders",
+				"name" => "Orders",
+				"singular_name" => "Order",
+				"public" => true,
+				"has_archive" => false,
+			],
+		];
+	}
+
+	public function registerCustomPostTypes()
+	{
+		foreach ($this->custom_post_types as $post_type) {
+			register_post_type($post_type["post_type"], [
+				"labels" => [
+					"name" => $post_type["name"],
+					"singular_name" => $post_type["singular_name"],
+				],
+				"public" => $post_type["public"],
+				"has_archive" => $post_type["has_archive"],
+			]);
+		}
 	}
 
 	public function setSubpages()
