@@ -5,8 +5,6 @@
 
 namespace Includes\Api\Callbacks;
 
-use Includes\Base\BaseController;
-
 class CptCallbacks
 {
 	public function cptSectionManager()
@@ -16,7 +14,22 @@ class CptCallbacks
 
 	public function cptSanitize($input)
 	{
-		return $input;
+		$output = get_option("smart_plugin_cpt");
+
+		if (count($output) == 0) {
+			$output[$input["post_type"]] = $input;
+			return $output;
+		}
+
+		foreach ($output as $key => $value) {
+			if ($input["post_type"] === $key) {
+				$output[$key] = $input;
+			} else {
+				$output[$input["post_type"]] = $input;
+			}
+		}
+
+		return $output;
 	}
 
 	public function textField($args)
@@ -24,19 +37,17 @@ class CptCallbacks
 		$name = $args["label_for"];
 		$option_name = $args["option_name"];
 		$input = get_option($option_name);
-		$value = $input[$name];
+		// $value = $input[$name];
 
 		echo '<input type="text" class="regular-text" id="' .
 			$name .
 			'" name="' .
 			$option_name .
-			"['test'][" .
+			"[" .
 			$name .
-			']" value="' .
-			$value .
-			'" placeholder="' .
+			']" value="" placeholder="' .
 			$args["placeholder"] .
-			'">';
+			'" required>';
 	}
 	public function checkboxField($args)
 	{
@@ -58,9 +69,7 @@ class CptCallbacks
 			$option_name .
 			"[" .
 			$name .
-			']" value="1" class="" ' .
-			($checked ? "checked" : "") .
-			'><label for="' .
+			']" value="1" class="" ><label for="' .
 			$name .
 			'"><div></div></label></div>';
 	}
