@@ -89,7 +89,7 @@ function triggerPlumber(src, url) {
 
 function watch_files() {
 	watch(phpWatch, reload);
-	watch(styleWatch, style);
+	watch(styleWatch, series(style, reload));
 	watch(jsWatch, series(js, reload));
 	src(jsURL + "script.js").pipe(
 		notify({ message: "Gulp is Watching, Happy Coding!" })
@@ -99,4 +99,4 @@ function watch_files() {
 task("style", style);
 task("js", js);
 task("default", parallel(style, js));
-task("watch", series(watch_files, browser_sync));
+task("watch", parallel(browser_sync, watch_files));

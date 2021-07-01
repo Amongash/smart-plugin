@@ -1,5 +1,6 @@
-window.addEventListener("load", function() {
-
+import "code-prettify";
+window.addEventListener("load", function () {
+	PR.prettyPrint();
 	// store tabs variables
 	var tabs = document.querySelectorAll("ul.nav-tabs > li");
 
@@ -19,7 +20,5 @@ window.addEventListener("load", function() {
 
 		clickedTab.classList.add("active");
 		document.querySelector(activePaneID).classList.add("active");
-
 	}
-
 });
