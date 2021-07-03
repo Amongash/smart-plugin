@@ -21,8 +21,7 @@ class CustomPostTypeController extends BaseController
 	{
 		$option = get_option("smart_plugin");
 
-		$activated = isset($option["cpt_manager"]) ? $option["cpt_manager"] : false;
-		if (!$activated) {
+		if (!$this->activated("media_widget")) {
 			return;
 		}
 		$this->settings = new SettingsApi();
