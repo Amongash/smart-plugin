@@ -19,6 +19,7 @@ final class Init
 			Base\Enqueue::class,
 			Base\SettingsLinks::class,
 			Base\CustomPostTypeController::class,
+			Base\WidgetController::class,
 		];
 	}
 
