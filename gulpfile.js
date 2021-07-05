@@ -28,12 +28,18 @@ var reload = browserSync.reload;
 // Project related variables
 var projectURL = "http://wordpress.local/";
 
-var styleSRC = "./src/admin/scss/style.scss";
-var styleURL = "./assets/admin/";
+var styleSRC = "./src/scss/style.scss";
+var styleForm = "./src/scss/form.scss";
+var styleSlider = "./src/scss/slider.scss";
+var styleURL = "./assets/css/";
 var mapURL = "./";
 
-var jsSRC = "./src/admin/js/script.js";
-var jsURL = "./assets/admin/";
+var jsSRC = "./src/js/";
+var jsAdmin = "script.js";
+var jsForm = "form.js";
+var jsSlider = "slider.js";
+var jsFiles = [jsAdmin, jsForm, jsSlider];
+var jsURL = "./assets/js/";
 
 var styleWatch = "./src/scss/**/*.scss";
 var jsWatch = "./src/js/**/*.js";
@@ -50,7 +56,7 @@ function browser_sync(done) {
 }
 
 function style(done) {
-	src(styleSRC)
+	src([styleSRC, styleForm, styleSlider])
 		.pipe(sourcemaps.init())
 		.pipe(
 			sass({
@@ -67,19 +73,21 @@ function style(done) {
 }
 
 function js(done) {
-	browserify({
-		entries: [jsSRC],
-	})
-		.transform(babelify, { presets: ["@babel/preset-env"] })
-		.bundle()
-		.pipe(source("script.js"))
-		.pipe(buffer())
-		.pipe(gulpif(options.has("production"), stripDebug()))
-		.pipe(sourcemaps.init({ loadMaps: true }))
-		.pipe(uglify())
-		.pipe(sourcemaps.write("."))
-		.pipe(dest(jsURL))
-		.pipe(browserSync.stream());
+	jsFiles.map(function (entry) {
+		browserify({
+			entries: [jsSRC + entry],
+		})
+			.transform(babelify, { presets: ["@babel/preset-env"] })
+			.bundle()
+			.pipe(source(entry))
+			.pipe(buffer())
+			.pipe(gulpif(options.has("production"), stripDebug()))
+			.pipe(sourcemaps.init({ loadMaps: true }))
+			.pipe(uglify())
+			.pipe(sourcemaps.write("."))
+			.pipe(dest(jsURL))
+			.pipe(browserSync.stream());
+	});
 	done();
 }
 
@@ -99,4 +107,4 @@ function watch_files() {
 task("style", style);
 task("js", js);
 task("default", parallel(style, js));
-task("watch", parallel(browser_sync, watch_files));
+task("watch", parallel(watch_files, browser_sync));

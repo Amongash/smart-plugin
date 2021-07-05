@@ -1,0 +1,3 @@
+#smart-contact-form .field-container{position:relative;margin-bottom:20px}#smart-contact-form .field-msg{display:none;position:absolute;left:0;font-size:10px;bottom:-12px;font-weight:600px;text-transform:uppercase;letter-spacing:0.05em}#smart-contact-form .field-msg.show{display:block}#smart-contact-form .submit-msg{display:none;position:absolute;left:0;font-size:10px;font-weight:600px;text-transform:uppercase;letter-spacing:0.05em}#smart-contact-form .submit-msg.show{display:block}#smart-contact-form .error{color:#901313}#smart-contact-form .success{color:#fcaf3b}
+
+/*# sourceMappingURL=form.css.map */

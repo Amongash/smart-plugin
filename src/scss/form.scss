@@ -1,0 +1,43 @@
+#smart-contact-form {
+	.field-container {
+		position: relative;
+		margin-bottom: 20px;
+	}
+
+	.field-msg {
+		display: none;
+		position: absolute;
+		left: 0;
+		font-size: 10px;
+		bottom: -12px;
+		font-weight: 600px;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+
+		&.show {
+			display: block;
+		}
+	}
+
+	.submit-msg {
+		display: none;
+		position: absolute;
+		left: 0;
+		font-size: 10px;
+		font-weight: 600px;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+
+		&.show {
+			display: block;
+		}
+	}
+
+	.error {
+		color: rgb(144, 19, 19);
+	}
+
+	.success {
+		color: rgb(252, 175, 59);
+	}
+}
