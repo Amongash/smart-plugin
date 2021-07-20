@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package SmartdeliveryPlugin
  */
@@ -14,7 +15,7 @@ class AdminCallbacks extends BaseController
     return require_once "$this->plugin_path/templates/admin.php";
   }
 
-  public function adminTaxonomies()
+  public function adminTaxonomy()
   {
     return require_once "$this->plugin_path/templates/taxonomies.php";
   }
@@ -27,23 +28,5 @@ class AdminCallbacks extends BaseController
   public function adminForms()
   {
     return require_once "$this->plugin_path/templates/form.php";
-  }
-
-  public function smartOptionsGroup($input)
-  {
-    return $input;
-  }
-
-  public function smartAdminSection()
-  {
-    echo "This is a section";
-  }
-
-  public function smartTextExample()
-  {
-    $value = esc_attr(get_option("text_example"));
-    echo '<input type="text" class="regular_text" name ="text_example" value="' .
-      $value .
-      '" placeholder="Write Something Here"> ';
   }
 }

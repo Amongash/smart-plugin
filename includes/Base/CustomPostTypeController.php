@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package SmartdeliveryPlugin
  */
@@ -21,7 +22,7 @@ class CustomPostTypeController extends BaseController
 	{
 		$option = get_option("smart_plugin");
 
-		if (!$this->activated("media_widget")) {
+		if (!$this->activated("cpt_manager")) {
 			return;
 		}
 		$this->settings = new SettingsApi();
@@ -63,7 +64,7 @@ class CustomPostTypeController extends BaseController
 				"search_items" => "Search " . $option["plural_name"],
 				"not_found" => "No " . $option["singular_name"] . " Found",
 				"not_found_in_trash" =>
-					"No " . $option["singular_name"] . " Found in Trash",
+				"No " . $option["singular_name"] . " Found in Trash",
 				"featured_image" => "Featured Image",
 				"set_featured_image" => "Set Featured Image",
 				"remove_featured_image" => "Remove Featured Image",
