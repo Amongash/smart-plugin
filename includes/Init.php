@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package SmartdeliveryPlugin
  */
@@ -19,8 +20,11 @@ final class Init
 			Base\Enqueue::class,
 			Base\SettingsLinks::class,
 			Base\CustomPostTypeController::class,
+			Base\CustomTaxonomyController::class,
 			Base\WidgetController::class,
 			Base\TestimonialController::class,
+			Base\ContactController::class,
+			Base\TemplateController::class,
 		];
 	}
 
