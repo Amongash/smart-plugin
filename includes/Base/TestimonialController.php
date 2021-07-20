@@ -99,17 +99,17 @@ class TestimonialController extends BaseController
 
 	public function testimonial_form()
 	{
-		echo "<link href=\"$this->plugin_url/assets/css/form.css\" type=\"text/css\" media=\"all\" rel=\"stylesheet\">";
 		ob_start();
-		require_once "$this->plugin_path/templates/contact-form.php";
+        echo "<link href=\"$this->plugin_url/assets/css/form.css\" type=\"text/css\" media=\"all\" rel=\"stylesheet\">";
+        require_once "$this->plugin_path/templates/contact-form.php";
 		echo "<script src=\"$this->plugin_url/assets/js/form.js\"></script>";
 		return ob_get_clean();
 	}
 
 	public function testimonial_slider()
 	{
+        ob_start();
 		echo "<link href=\"$this->plugin_url/assets/css/slider.css\" type=\"text/css\" media=\"all\" rel=\"stylesheet\">";
-		ob_start();
 		require_once "$this->plugin_path/templates/slider.php";
 		echo "<script src=\"$this->plugin_url/assets/js/slider.js\"></script>";
 		return ob_get_clean();
