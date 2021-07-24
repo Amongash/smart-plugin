@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package SmartdeliveryPlugin
  */
@@ -20,9 +21,9 @@ class BaseController
 		$this->managers = [
 			"cpt_manager" => "Activate CPT Manager",
 			"taxonomy_manager" => "Activate Taxonomy Manager",
-			"media_widget" => "Activate Media Widget",
-			"gallery_manager" => "Activate Gallery Manager",
-			"testimonial_manager" => "Activate Testimonial Manager",
+			// "media_widget" => "Activate Media Widget",
+			// "gallery_manager" => "Activate Gallery Manager",
+			// "testimonial_manager" => "Activate Testimonial Manager",
 			"templates_manager" => "Activate Custom Templates",
 			"login_manager" => "Activate Ajax Login/Signup",
 			"membership_manager" => "Activate Membership Manager",
