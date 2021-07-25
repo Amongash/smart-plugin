@@ -30,6 +30,7 @@ var projectURL = "http://wordpress.local/";
 
 var styleSRC = "./src/scss/style.scss";
 var styleForm = "./src/scss/form.scss";
+var styleAuth = "./src/scss/auth.scss";
 var styleSlider = "./src/scss/slider.scss";
 var styleURL = "./assets/css/";
 var mapURL = "./";
@@ -37,8 +38,9 @@ var mapURL = "./";
 var jsSRC = "./src/js/";
 var jsAdmin = "script.js";
 var jsForm = "form.js";
+var jsAuth = "auth.js";
 var jsSlider = "slider.js";
-var jsFiles = [jsAdmin, jsForm, jsSlider];
+var jsFiles = [jsAdmin, jsForm, jsSlider, jsAuth];
 var jsURL = "./assets/js/";
 
 var styleWatch = "./src/scss/**/*.scss";
@@ -56,7 +58,7 @@ function browser_sync(done) {
 }
 
 function style(done) {
-	src([styleSRC, styleForm, styleSlider])
+	src([styleSRC, styleForm, styleSlider, styleAuth])
 		.pipe(sourcemaps.init())
 		.pipe(
 			sass({

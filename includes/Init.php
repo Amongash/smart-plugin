@@ -25,6 +25,7 @@ final class Init
 			Base\TestimonialController::class,
 			Base\ContactController::class,
 			Base\TemplateController::class,
+			Base\AuthController::class,
 		];
 	}
 
