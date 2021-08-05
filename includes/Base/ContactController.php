@@ -30,7 +30,6 @@ class ContactController extends BaseController
 		$this->settings = new SettingsApi();
 		$this->callbacks = new ContactCallbacks();
 		add_action("init", [$this, "contact_cpt"]);
-		add_action("save_post", [$this, "save_meta_box"]);
 
 		add_action("manage_contact_posts_columns", [
 			$this,

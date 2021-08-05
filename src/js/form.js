@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
 			message: contactForm.querySelector('[name="message"]').value,
 			nonce: contactForm.querySelector('[name="nonce"]').value,
 		};
-		console.log(data);
 
 		//validate data
 		if (!data.name) {

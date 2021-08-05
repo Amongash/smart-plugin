@@ -13,6 +13,7 @@ use Includes\Api\Callbacks\AdminCallbacks;
 
 class CustomPostTypeController extends BaseController
 {
+	public $settings;
 	public $callbacks;
 	public $subpages = [];
 	public $custom_post_types = [];
@@ -20,7 +21,6 @@ class CustomPostTypeController extends BaseController
 
 	public function register()
 	{
-		$option = get_option("smart_plugin");
 
 		if (!$this->activated("cpt_manager")) {
 			return;
