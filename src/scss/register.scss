@@ -1,0 +1,114 @@
+#smart-register-form {
+	padding-top: 20px;
+
+	.field-container {
+		position: relative;
+		margin-bottom: 20px;
+	}
+
+	.field-msg {
+		display: none;
+		position: absolute;
+		left: 0;
+		font-size: 10px;
+		bottom: -12px;
+		font-weight: 600px;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+
+		&.show {
+			display: block;
+		}
+	}
+
+	.submit-msg {
+		display: none;
+		position: absolute;
+		left: 0;
+		font-size: 10px;
+		font-weight: 600px;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+
+		&.show {
+			display: block;
+		}
+	}
+
+	.error {
+		color: rgb(144, 19, 19);
+	}
+
+	.success {
+		color: rgb(252, 175, 59);
+	}
+
+	button {
+		display: block;
+		margin: 0 auto;
+		padding: 0.6em 0.8em;
+		/* Font-size is the root value that determines size of spinner parts. Change this to whatever you want and spinner elements will size to match. */
+		font-size: 20px;
+		font-weight: bold;
+		border: none;
+		overflow: hidden;
+		cursor: pointer;
+		position: relative;
+		transition: all 1s;
+	}
+
+	button:focus,
+	button:disabled {
+		outline: none;
+		background: #aaa;
+	}
+
+	/* This is the space for the spinner to appear, applied to the button */
+	.spin {
+		padding-left: 2.5em;
+		display: block;
+	}
+
+	/* position of the spinner when it appears, you might have to change these values */
+	.spin .spinner {
+		left: -0.6em;
+		// top: 0.4em;
+		width: 2.5em;
+		display: block;
+		position: absolute;
+	}
+
+	/* spinner animation */
+	@keyframes spinner {
+		0% {
+			transform: rotate(0deg);
+		}
+
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	/* The actual spinner element is a pseudo-element */
+	.spin .spinner::before {
+		content: "";
+		width: 1.5em; /* Size of the spinner */
+		height: 1.5em; /* Change as desired */
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		border-radius: 50%;
+		border: solid 0.35em #999; /* Thickness/color of spinner track */
+		border-bottom-color: #555; /* Color of variant spinner piece */
+		animation: 0.8s linear infinite spinner; /* speed of spinner */
+		transform: translate(-50%, -50%);
+		will-change: transform;
+	}
+
+	/* optional, but it will affect the size if changed */
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+}

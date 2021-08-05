@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package SmartdeliveryPlugin
  */
@@ -23,6 +24,7 @@ if (file_exists(dirname(__FILE__) . "/vendor/autoload.php")) {
 function activate_smart_plugin()
 {
   Includes\Base\Activate::activate();
+  Includes\Base\SetupTables::smart_create_tables();
 }
 
 /**
