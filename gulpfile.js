@@ -23,13 +23,13 @@ var gulpif = require("gulp-if");
 
 // Browers related plugins
 var browserSync = require("browser-sync").create();
-var reload = browserSync.reload;
 
 // Project related variables
 var projectURL = "http://wordpress.local/";
 
 var styleSRC = "./src/scss/style.scss";
 var styleForm = "./src/scss/form.scss";
+var styleQuote = "./src/scss/quote.scss";
 var styleRegister = "./src/scss/register.scss";
 var styleAuth = "./src/scss/auth.scss";
 var styleSlider = "./src/scss/slider.scss";
@@ -39,10 +39,11 @@ var mapURL = "./";
 var jsSRC = "./src/js/";
 var jsAdmin = "script.js";
 var jsForm = "form.js";
+var jsQuote = "quote.js";
 var jsRegister = "register.js";
 var jsAuth = "auth.js";
 var jsSlider = "slider.js";
-var jsFiles = [jsAdmin, jsForm, jsSlider, jsAuth, jsRegister];
+var jsFiles = [jsAdmin, jsForm, jsSlider, jsAuth, jsRegister, jsQuote];
 var jsURL = "./assets/js/";
 
 var styleWatch = "./src/scss/**/*.scss";
@@ -60,7 +61,7 @@ function browser_sync(done) {
 }
 
 function style(done) {
-	src([styleSRC, styleForm, styleRegister, styleSlider, styleAuth])
+	src([styleSRC, styleForm, styleRegister, styleQuote, styleSlider, styleAuth])
 		.pipe(sourcemaps.init())
 		.pipe(
 			sass({
@@ -99,16 +100,22 @@ function triggerPlumber(src, url) {
 	return src(src).pipe(plumber()).pipe(dest(url));
 }
 
-function watch_files() {
+function reload(done) {
+	browserSync.reload();
+	done();
+}
+
+function watch_files(done) {
 	watch(phpWatch, reload);
 	watch(styleWatch, series(style, reload));
 	watch(jsWatch, series(js, reload));
 	src(jsURL + "script.js").pipe(
 		notify({ message: "Gulp is Watching, Happy Coding!" })
 	);
+	done();
 }
 
 task("style", style);
 task("js", js);
 task("default", parallel(style, js));
-task("watch", parallel(watch_files, browser_sync));
+task("watch", series(watch_files, browser_sync));
