@@ -27,6 +27,7 @@ final class Init
 			Base\TemplateController::class,
 			// Base\AuthController::class,
 			Base\RegisterController::class,
+			Base\QuoteController::class,
 		];
 	}
 

@@ -29,7 +29,8 @@ class BaseController
 			// "membership_manager" => "Activate Membership Manager",
 			// "chat_manager" => "Activate Chat Manager",
 			"contact_form" => "Activate Contact Form",
-			"register_form" => "Activate Registration Section"
+			"register_form" => "Activate Registration Section",
+			"quote_form" => "Activate Quote Form"
 		];
 	}
 
