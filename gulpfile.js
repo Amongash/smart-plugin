@@ -30,6 +30,7 @@ var projectURL = "http://wordpress.local/";
 var styleSRC = "./src/scss/style.scss";
 var styleForm = "./src/scss/form.scss";
 var styleQuote = "./src/scss/quote.scss";
+var styleSpinner = "./src/scss/spinner.scss";
 var styleRegister = "./src/scss/register.scss";
 var styleAuth = "./src/scss/auth.scss";
 var styleSlider = "./src/scss/slider.scss";
@@ -61,7 +62,15 @@ function browser_sync(done) {
 }
 
 function style(done) {
-	src([styleSRC, styleForm, styleRegister, styleQuote, styleSlider, styleAuth])
+	src([
+		styleSRC,
+		styleForm,
+		styleRegister,
+		styleQuote,
+		styleSpinner,
+		styleSlider,
+		styleAuth,
+	])
 		.pipe(sourcemaps.init())
 		.pipe(
 			sass({

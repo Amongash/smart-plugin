@@ -23,18 +23,15 @@ class QuoteController extends BaseController
 
     public function enqueue()
     {
-        wp_register_style('quoteStyle', $this->plugin_url . 'assets/css/quote.css');
-        wp_enqueue_style('quoteStyle');
-        wp_register_script('quoteScript', $this->plugin_url . 'assets/js/quote.js', ["jquery"], "", true);
-        wp_enqueue_script('quoteScript');
+        if (!is_page('get-quote')) return;
+        wp_enqueue_style('quoteStyle', $this->plugin_url . 'assets/css/quote.css');
+        wp_enqueue_script('quoteScript', $this->plugin_url . 'assets/js/quote.js', ["jquery"], "", true);
     }
 
     public function quote_form()
     {
         ob_start();
-        // echo "<link href=\"$this->plugin_url/assets/css/quote.css\" type=\"text/css\" media=\"all\" rel=\"stylesheet\">";
         require_once "$this->plugin_path/templates/quote.php";
-        // echo "<script src=\"$this->plugin_url/assets/js/quote.js\"></script>";
         return ob_get_clean();
     }
 
