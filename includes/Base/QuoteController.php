@@ -25,6 +25,7 @@ class QuoteController extends BaseController
     {
         if (!is_page('get-quote')) return;
         wp_enqueue_style('quoteStyle', $this->plugin_url . 'assets/css/quote.css');
+        wp_enqueue_script('helperScript', $this->plugin_url . 'assets/js/helpers.js', ["jquery"], "", true);
         wp_enqueue_script('quoteScript', $this->plugin_url . 'assets/js/quote.js', ["jquery"], "", true);
     }
 

@@ -34,6 +34,7 @@ var styleSpinner = "./src/scss/spinner.scss";
 var styleRegister = "./src/scss/register.scss";
 var styleAuth = "./src/scss/auth.scss";
 var styleSlider = "./src/scss/slider.scss";
+var styleFrontend = "./src/scss/frontend.scss";
 var styleURL = "./assets/css/";
 var mapURL = "./";
 
@@ -44,7 +45,16 @@ var jsQuote = "quote.js";
 var jsRegister = "register.js";
 var jsAuth = "auth.js";
 var jsSlider = "slider.js";
-var jsFiles = [jsAdmin, jsForm, jsSlider, jsAuth, jsRegister, jsQuote];
+var jsHelpers = "helpers.js";
+var jsFiles = [
+	jsAdmin,
+	jsForm,
+	jsSlider,
+	jsAuth,
+	jsRegister,
+	jsQuote,
+	jsHelpers,
+];
 var jsURL = "./assets/js/";
 
 var styleWatch = "./src/scss/**/*.scss";
@@ -70,6 +80,7 @@ function style(done) {
 		styleSpinner,
 		styleSlider,
 		styleAuth,
+		styleFrontend,
 	])
 		.pipe(sourcemaps.init())
 		.pipe(

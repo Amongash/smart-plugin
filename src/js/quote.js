@@ -1,3 +1,4 @@
+import { activateSpinner, deactivateSpinner } from "./helpers";
 (function ($) {
 	$(".add_list_item").click(function () {
 		let clone = $("#template").clone(true);
@@ -86,47 +87,5 @@
 		// 		//if fails
 		// 	},
 		// });
-	}
-
-	function retrieveFormValues(name) {
-		var value;
-		$.each(
-			$("input[name=" + name + "], select[name=" + name + "]"),
-			function (i, v) {
-				var theElement = $(v);
-				var theValue = theElement.val();
-				value = theValue;
-			}
-		);
-		return value;
-	}
-
-	function retrieveFormValues_Array(name) {
-		var value = new Array();
-		var counter = 0;
-		$.each(
-			$("input[name=" + name + "], select[name=" + name + "]"),
-			function (i, v) {
-				var theElement = $(v);
-				var theValue = theElement.val();
-				value[counter] = theValue;
-
-				counter++;
-			}
-		);
-		return value;
-	}
-
-	function activateSpinner($btn) {
-		console.log("activateSpinner");
-		$btn.attr("class", "spin");
-		$btn.prop("disabled", true);
-		return;
-	}
-
-	function deactivateSpinner($btn) {
-		$btn.removeAttr("class", "spin");
-		$btn.prop("disabled", false);
-		return;
 	}
 })(jQuery);

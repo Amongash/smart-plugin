@@ -22,17 +22,26 @@ class RegisterController extends BaseController
             return;
         }
 
+        add_action('wp_enqueue_scripts', [$this, "enqueue"]);
         add_shortcode("register-form", [$this, "register_form"]);
         add_action("wp_ajax_submit_register", [$this, "submit_register"]);
         add_action("wp_ajax_nopriv_submit_register", [$this, "submit_register"]);
     }
 
+    public function enqueue()
+    {
+        if (!is_page('sign-up')) return;
+        wp_enqueue_style('frontendStyle', $this->plugin_url . 'assets/css/frontend.css');
+        wp_enqueue_style('registerStyle', $this->plugin_url . 'assets/css/register.css');
+        wp_enqueue_script('helperScript', $this->plugin_url . 'assets/js/helpers.js', ["jquery"], "", true);
+        wp_enqueue_script('registerScript', $this->plugin_url . 'assets/js/register.js', ["jquery"], "", true);
+    }
+
+
     public function register_form()
     {
         ob_start();
-        echo "<link href=\"$this->plugin_url/assets/css/register.css\" type=\"text/css\" media=\"all\" rel=\"stylesheet\">";
         require_once "$this->plugin_path/templates/register.php";
-        echo "<script src=\"$this->plugin_url/assets/js/register.js\"></script>";
         return ob_get_clean();
     }
 
@@ -73,7 +82,6 @@ class RegisterController extends BaseController
         if ($result) {
 
             $subject = "New Shipping Address for " . $first_name;
-            // $message = file_get_contents("$this->plugin_path/templates/email.php");
             $message = $this->generate_message_body($first_name);
             if ($this->send_mail($email, $subject, $message)) {
                 return $this->return_json("success");
