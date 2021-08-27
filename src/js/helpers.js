@@ -1,9 +1,5 @@
 export function showPageLoader($overlay, $loader) {
-	$overlay.show().css({
-		opacity: 0.7,
-		width: "100%",
-		height: "100%",
-	});
+	$overlay.fadeIn("slow");
 	$loader.attr("style", "display:block");
 }
 
@@ -54,7 +50,7 @@ export function hideForm($form, $overlay, $loader, $message) {
 	if (!$form) return;
 	$form.fadeOut(3000, function () {
 		hideLoaderShowResponse($overlay, $loader);
-		$form.remove();
+		$form.fadeOut("fast");
 		$message.attr("style", "display:block");
 	});
 }

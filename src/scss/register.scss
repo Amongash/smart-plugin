@@ -10,9 +10,31 @@
 		grid-row-gap: 16px;
 	}
 
+	// TODO: make elements appear in mobile browsers
+	.user-details {
+		display: flex;
+		flex-flow: row wrap;
+	}
+
 	.field-container {
 		position: relative;
 		margin-bottom: 20px;
+
+		& label {
+			display: inline;
+			font-size: 15px;
+		}
+
+		.choice-input {
+			display: inline;
+			margin-top: 0;
+			top: 0;
+			vertical-align: middle;
+		}
+
+		.checkbox-inline {
+			display: inline;
+		}
 	}
 
 	.field-msg {
@@ -29,32 +51,14 @@
 			display: block;
 		}
 	}
-
-	.error {
-		color: rgb(144, 19, 19);
-	}
-
-	.success {
-		color: rgb(252, 175, 59);
-	}
-
-	&.hide {
-		display: none;
-	}
-	@import "./spinner.scss";
 }
 
-.smart-message-container {
-	margin: bottom 10px;
-
-	.submit-msg {
-		display: none;
-		position: absolute;
-		font-size: 15px;
-		letter-spacing: 0.05em;
-
-		&.show {
-			display: block;
-		}
+@media screen and (max-width: 600px) {
+	#smart-page-container {
+		width: 100%;
+		margin-top: 0;
+	}
+	.details {
+		grid-column-gap: 0;
 	}
 }

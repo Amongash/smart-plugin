@@ -4,7 +4,7 @@ import { hideForm, showPageLoader } from "./helpers";
 	let message = $("#smart-message-container");
 	let btn = $("#submit-register-form");
 	let overlay = $(".overlay");
-	let loader = $(".lds-dual-ring");
+	let loader = $(".lds-ellipsis");
 
 	btn.on("click", function (e) {
 		e.preventDefault();

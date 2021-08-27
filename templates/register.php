@@ -1,5 +1,10 @@
-<div class="overlay">
-    <div class="lds-dual-ring" style="display: none"></div>
+<div class="overlay" style="display: none">
+    <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </div>
 <div id="smart-page-container">
     <div id="smart-message-container" class="animate-bottom">
@@ -8,6 +13,7 @@
     <div class="smart-form-container">
         <form id="smart-register-form" action="#" method="post" data-url="<?php echo admin_url("admin-ajax.php"); ?>">
             <div class="details">
+                <!-- <div class="user-details"> -->
                 <div>
                     <label for="first_name">First Name<span class="input-required">*</span></label>
                     <div class="field-container name">
@@ -20,19 +26,23 @@
                         <input type="text" placeholder="Last Name" class="form-control" name="last_name" access="false" id="last_name" title="Last Name" required="required" aria-required="true">
                     </div>
                 </div>
+                <!-- </div> -->
+
             </div>
 
             <div class="details">
-                <div>
-                    <label for="phone">Phone<span class="input-required">*</span></label>
-                    <div class="field-container">
-                        <input type="text" placeholder="Phone" class="form-control" name="phone" access="false" id="phone" title="Phone" required="required" aria-required="true">
+                <div class="user-details">
+                    <div>
+                        <label for="phone">Phone<span class="input-required">*</span></label>
+                        <div class="field-container">
+                            <input type="text" placeholder="Phone" class="form-control" name="phone" access="false" id="phone" title="Phone" required="required" aria-required="true">
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="email">Email<span class="input-required">*</span></label>
-                    <div class="field-container">
-                        <input type="text" placeholder="Email" class="form-control" name="email" access="false" id="email" title="Email" required="required" aria-required="true">
+                    <div>
+                        <label for="email">Email<span class="input-required">*</span></label>
+                        <div class="field-container">
+                            <input type="text" placeholder="Email" class="form-control" name="email" access="false" id="email" title="Email" required="required" aria-required="true">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,10 +52,10 @@
                 <div class="field-container">
                     <div class="radio-group">
 
-                        <input name="gender" access="false" id="gender-0" required="required" aria-required="true" value="male" type="radio">
+                        <input class="choice-input" name="gender" access="false" id="gender-0" required="required" aria-required="true" value="male" type="radio">
                         <label for="male">Male</label>
 
-                        <input name="gender" access="false" id="gender-1" required="required" aria-required="true" value="female" type="radio">
+                        <input class="choice-input" name="gender" access="false" id="gender-1" required="required" aria-required="true" value="female" type="radio">
                         <label for="female">Female</label>
                     </div>
                 </div>
@@ -56,7 +66,7 @@
                 <div class="field-container">
                     <div class="checkbox-group">
                         <div class="checkbox-inline">
-                            <input name="agreement" access="false" id="agreement" required="required" aria-required="true" type="checkbox">
+                            <input class="choice-input" name="agreement" access="false" id="agreement" required="required" aria-required="true" type="checkbox">
                             <label for="agreement">I accept the terms &amp; conditions as well as the privacy policy.</label>
                         </div>
                     </div>
