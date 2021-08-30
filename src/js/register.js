@@ -2,7 +2,7 @@ import { hideForm, showPageLoader } from "./helpers";
 (function ($) {
 	let registerForm = $("#smart-register-form");
 	let message = $("#smart-message-container");
-	let btn = $("#submit-register-form");
+	let btn = $("#smart-submit");
 	let overlay = $(".overlay");
 	let loader = $(".lds-ellipsis");
 

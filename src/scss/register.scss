@@ -1,64 +1,75 @@
-#smart-register-form {
+#smart-page-container {
+	display: flex;
+	min-height: 600px;
+	justify-content: center;
+}
+
+.smart-register-form {
 	padding-top: 20px;
+}
 
-	.details {
-		width: 100%;
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: repeat(auto-fill, auto);
-		grid-column-gap: 2%;
-		grid-row-gap: 16px;
-	}
+.details {
+	display: flex;
+}
 
-	// TODO: make elements appear in mobile browsers
-	.user-details {
+.user-details {
+	display: flex;
+	flex-wrap: nowrap;
+
+	& div {
 		display: flex;
-		flex-flow: row wrap;
-	}
-
-	.field-container {
-		position: relative;
-		margin-bottom: 20px;
-
-		& label {
-			display: inline;
-			font-size: 15px;
-		}
-
-		.choice-input {
-			display: inline;
-			margin-top: 0;
-			top: 0;
-			vertical-align: middle;
-		}
-
-		.checkbox-inline {
-			display: inline;
+		margin: 10px;
+		flex-direction: column;
+		width: 100%;
+		> input {
+			width: 100%;
+			flex-grow: 1;
 		}
 	}
 
-	.field-msg {
-		display: none;
-		position: absolute;
-		left: 0;
-		font-size: 10px;
-		bottom: -12px;
-		font-weight: 600px;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-
-		&.show {
-			display: block;
-		}
+	& label {
+		display: inline;
+		font-size: 15px;
 	}
 }
 
-@media screen and (max-width: 600px) {
+.field-container {
+	margin-bottom: 20px;
+	& label {
+		display: inline;
+		font-size: 15px;
+	}
+	.choice-input {
+		display: inline;
+		margin-top: 0;
+		top: 0;
+		vertical-align: middle;
+	}
+
+	.checkbox-inline {
+		display: inline;
+	}
+}
+
+@media screen and (max-width: 680px) {
 	#smart-page-container {
 		width: 100%;
 		margin-top: 0;
 	}
-	.details {
-		grid-column-gap: 0;
+
+	.user-details {
+		flex-wrap: wrap;
+
+		& div {
+			margin: 0;
+			padding-top: 5px;
+			justify-self: center;
+		}
+	}
+	.submit-button {
+		text-align: center;
+	}
+	.submit-register-form {
+		width: 80%;
 	}
 }

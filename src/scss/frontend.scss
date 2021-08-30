@@ -4,10 +4,6 @@
 	box-sizing: border-box;
 }
 
-#smart-page-container {
-	min-height: 600px;
-}
-
 #smart-message-container {
 	display: none;
 	text-align: center;
@@ -24,6 +20,7 @@
 	bottom: 0;
 	left: 0;
 	z-index: 1;
+	cursor: progress;
 }
 
 /* Add animation to "page content" */
