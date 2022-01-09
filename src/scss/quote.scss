@@ -38,7 +38,8 @@
 }
 
 fieldset {
-	border: none;
+	border: 1px solid #fcaf3b !important;
+	border-radius: 5px;
 	display: block;
 	margin: 0;
 }
@@ -199,6 +200,11 @@ input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]):not([type=
 
 .gfield textarea.large {
 	height: 288px;
+}
+
+.submit-button {
+	display: flex;
+	justify-content: center;
 }
 
 @media (max-width: 640px) {

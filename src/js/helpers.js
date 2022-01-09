@@ -19,33 +19,6 @@ export function deactivateSpinner($btn) {
 	$btn.prop("disabled", false);
 	return;
 }
-export function retrieveFormValues(name) {
-	var value;
-	$.each(
-		$("input[name=" + name + "], select[name=" + name + "]"),
-		function (i, v) {
-			var theElement = $(v);
-			var theValue = theElement.val();
-			value = theValue;
-		}
-	);
-	return value;
-}
-export function retrieveFormValues_Array(name) {
-	var value = new Array();
-	var counter = 0;
-	$.each(
-		$("input[name=" + name + "], select[name=" + name + "]"),
-		function (i, v) {
-			var theElement = $(v);
-			var theValue = theElement.val();
-			value[counter] = theValue;
-			counter++;
-		}
-	);
-	return value;
-}
-
 export function hideForm($form, $overlay, $loader, $message) {
 	if (!$form) return;
 	$form.fadeOut(3000, function () {

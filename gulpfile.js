@@ -35,6 +35,7 @@ var styleRegister = "./src/scss/register.scss";
 var styleAuth = "./src/scss/auth.scss";
 var styleSlider = "./src/scss/slider.scss";
 var styleFrontend = "./src/scss/frontend.scss";
+var styleRates = "./src/scss/rates.scss";
 var styleURL = "./assets/css/";
 var mapURL = "./";
 
@@ -81,6 +82,7 @@ function style(done) {
 		styleSlider,
 		styleAuth,
 		styleFrontend,
+		styleRates,
 	])
 		.pipe(sourcemaps.init())
 		.pipe(

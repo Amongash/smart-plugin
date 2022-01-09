@@ -1,0 +1,233 @@
+.smart-page-container {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	min-height: 600px;
+	padding: 50px 0;
+}
+
+.smart-rate-container {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.smart-rate-text {
+	flex: 0.5;
+	margin-right: 10px;
+}
+
+.col-md-4,
+.col-sm-6 {
+	position: relative;
+	max-width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.col-md-4 {
+	flex: 0 0 33.333333%;
+	max-width: 33.333333%;
+}
+
+.col-sm-6 {
+	flex: 0 0 50%;
+	max-width: 50%;
+}
+
+.smart-row {
+	display: flex;
+	flex: 1;
+	flex-wrap: wrap;
+	margin-right: -15px;
+	margin-left: -15px;
+}
+
+@media (max-width: 992px) {
+	.smart-rate-container {
+		max-width: 960px;
+	}
+
+	.smart-rate-container {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+
+	.col-md-4,
+	.col-sm-6 {
+		flex: 0 0 100%;
+		max-width: 90%;
+		margin: 20px 10px;
+	}
+}
+
+.heading-title {
+	margin-bottom: 50px;
+}
+
+.strong-text {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.pricingTable {
+	border: 2px solid #e3e3e3;
+	text-align: center;
+	position: relative;
+	padding-bottom: 40px;
+	transform: translateZ(0px);
+}
+
+.pricingTable:before,
+.pricingTable:after {
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	bottom: -2px;
+	right: -2px;
+	z-index: -1;
+	transition: all 0.5s ease 0s;
+}
+
+.pricingTable:before {
+	border-right: 2px solid #fcaf3b;
+	border-left: 2px solid #fcaf3b;
+	transform: scaleY(0);
+	transform-origin: 100% 0 0;
+}
+
+.pricingTable:after {
+	border-bottom: 2px solid #fcaf3b;
+	border-top: 2px solid #fcaf3b;
+	transform: scaleX(0);
+	transform-origin: 0 100% 0;
+}
+
+.pricingTable:hover:before {
+	transform: scaleY(1);
+}
+
+.pricingTable:hover:after {
+	transform: scaleX(1);
+}
+
+.pricingTable .pricingTable-header {
+	background: #fcaf3b;
+	color: #14171c;
+	margin: -2px -2px 35px;
+	padding: 40px 0;
+}
+
+.pricingTable .heading {
+	font-size: 30px;
+	font-weight: 600;
+	margin: 0 0 5px 0;
+}
+
+.pricingTable .subtitle {
+	font-size: 14px;
+	display: block;
+	margin-bottom: 14px;
+}
+
+.pricingTable .price-value {
+	font-size: 72px;
+	font-weight: 600;
+	margin-top: 10px;
+	position: relative;
+	display: inline-block;
+}
+
+.pricingTable .currency {
+	font-size: 45px;
+	font-weight: normal;
+	position: absolute;
+	top: 2px;
+	left: -30px;
+}
+
+.pricingTable .weight {
+	font-size: 20px;
+	position: absolute;
+	bottom: 17px;
+	right: -40px;
+}
+
+.pricingTable .pricing-content {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 30px;
+}
+
+.pricingTable .pricing-content li {
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 40px;
+}
+
+.pricingTable .read {
+	display: inline-block;
+	border: 2px solid #ffffff;
+	border-right: none;
+	font-size: 14px;
+	font-weight: 700;
+	color: #ffffff;
+	padding: 9px 30px;
+	position: relative;
+	text-transform: uppercase;
+	transition: all 0.3s ease 0s;
+}
+
+.pricingTable .read:hover {
+	border-color: #fcaf3b;
+	color: #fcaf3b;
+}
+
+.pricingTable .read i {
+	font-size: 19px;
+	margin-top: -10px;
+	position: absolute;
+	top: 50%;
+	right: 15px;
+	transition: all 0.3s ease 0s;
+}
+
+.pricingTable .read:hover i {
+	right: 5px;
+}
+
+.pricingTable .read:before,
+.pricingTable .read:after {
+	content: "";
+	display: block;
+	height: 30px;
+	border-left: 2px solid #ffffff;
+	position: absolute;
+	right: -11px;
+	transition: all 0.3s ease 0s;
+}
+
+.pricingTable .read:before {
+	bottom: -6px;
+	transform: rotate(45deg);
+}
+
+.pricingTable .read:after {
+	top: -6px;
+	transform: rotate(-45deg);
+}
+
+.pricingTable .read:hover:before,
+.pricingTable .read:hover:after {
+	border-left-color: #fcaf3b;
+}
+
+@media screen and (max-width: 990px) {
+	.pricingTable {
+		margin-bottom: 25px;
+	}
+}

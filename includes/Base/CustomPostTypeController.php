@@ -90,6 +90,7 @@ class CustomPostTypeController extends BaseController
 				"exclude_from_search" => false,
 				"publicly_queryable" => true,
 				"capability_type" => "post",
+				"show_in_rest" => $option["show_in_rest"],
 			];
 		}
 	}
@@ -245,6 +246,18 @@ class CustomPostTypeController extends BaseController
 				"args" => [
 					"option_name" => "smart_plugin_cpt",
 					"label_for" => "has_archive",
+					"class" => "ui-toggle",
+				],
+			],
+			[
+				"id" => "show_in_rest",
+				"title" => "Use Block Editor",
+				"callback" => [$this->cpt_callbacks, "checkboxField"],
+				"page" => "smart_plugin_cpt",
+				"section" => "smart_cpt_index",
+				"args" => [
+					"option_name" => "smart_plugin_cpt",
+					"label_for" => "show_in_rest",
 					"class" => "ui-toggle",
 				],
 			],

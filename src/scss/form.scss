@@ -1,43 +1,143 @@
+p {
+	line-height: 32px;
+}
+
+h2 {
+	line-height: 32px;
+}
+
+form .error {
+	color: #ff0000;
+	font-size: 12px;
+}
+
+#smart-page-container {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.header-text {
+	margin-left: 20px;
+}
+
 #smart-contact-form {
-	.field-container {
+	padding: 12px;
+	width: 100%;
+	margin: 20px;
+	border: #fcaf3b;
+	border-width: 1px;
+	border-radius: 5px;
+	border-style: solid;
+}
+
+.user-input {
+	display: flex;
+	flex-wrap: nowrap;
+	margin-bottom: 20px;
+
+	& div {
+		display: flex;
+		margin: 10px;
+		flex-direction: column;
+		width: 100%;
+		> input {
+			width: 100%;
+			flex-grow: 1;
+			font-size: 14px;
+		}
+	}
+
+	& label {
+		display: inline-block;
+		font-size: 14px;
+		color: #fff;
+	}
+
+	& textarea {
+		min-height: 100px;
+	}
+}
+
+.field-msg {
+	display: none;
+	position: absolute;
+	left: 0;
+	font-size: 10px;
+	bottom: -12px;
+	font-weight: 600px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+
+	&.show {
+		display: block;
+	}
+}
+
+.submit-msg {
+	display: none;
+	position: absolute;
+	left: 0;
+	font-size: 10px;
+	font-weight: 600px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+
+	&.show {
+		display: block;
+	}
+}
+
+.submit-button {
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+
+.submit-contact-form {
+	width: 180px;
+}
+
+.socials {
+	position: relative;
+	bottom: 200px;
+	margin-left: 10px;
+}
+.error {
+	color: rgb(144, 19, 19);
+}
+
+.success {
+	color: rgb(252, 175, 59);
+}
+
+@media screen and (max-width: 680px) {
+	#smart-page-container {
+		width: 100%;
+		margin-top: 0;
+	}
+
+	#smart-contact-form {
+		padding: 12px 4px;
+		width: 95%;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	.user-input {
+		margin: 12px;
+		flex-wrap: wrap;
+
+		& div {
+			margin-top: 4px;
+			justify-self: center;
+		}
+	}
+
+	.socials {
 		position: relative;
-		margin-bottom: 20px;
-	}
-
-	.field-msg {
-		display: none;
-		position: absolute;
-		left: 0;
-		font-size: 10px;
-		bottom: -12px;
-		font-weight: 600px;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-
-		&.show {
-			display: block;
-		}
-	}
-
-	.submit-msg {
-		display: none;
-		position: absolute;
-		left: 0;
-		font-size: 10px;
-		font-weight: 600px;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-
-		&.show {
-			display: block;
-		}
-	}
-
-	.error {
-		color: rgb(144, 19, 19);
-	}
-
-	.success {
-		color: rgb(252, 175, 59);
+		bottom: 0px;
+		margin-left: 10px;
 	}
 }

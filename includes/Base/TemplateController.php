@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package SmartdeliveryPlugin
  */
@@ -18,7 +19,7 @@ class TemplateController extends BaseController
             return;
         }
 
-        $this->templates = ["page-templates/two-columns-tpl.php" => "Two Columns Layout"];
+        $this->templates = [];
 
         add_filter("theme_page_templates", [$this, 'custom_templates']);
         add_filter("template_include", [$this, "load_template"]);
@@ -38,7 +39,6 @@ class TemplateController extends BaseController
         }
 
         $template_name = get_post_meta($post->ID, '_wp_page_template', true);
-
         if (!isset($this->templates[$template_name])) {
             return $template;
         }
@@ -49,7 +49,4 @@ class TemplateController extends BaseController
         }
         return $template;
     }
-
-
 }
-

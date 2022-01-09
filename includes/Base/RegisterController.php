@@ -31,11 +31,14 @@ class RegisterController extends BaseController
     public function enqueue()
     {
         if (!is_page('sign-up')) return;
+
         wp_enqueue_style('frontendStyle', $this->plugin_url . 'assets/css/frontend.css');
         wp_enqueue_style('registerStyle', $this->plugin_url . 'assets/css/register.css');
+        wp_enqueue_script('jquery-validation-plugin', "https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js", ["jquery"]);
         wp_enqueue_script('helperScript', $this->plugin_url . 'assets/js/helpers.js', ["jquery"], "", true);
         wp_enqueue_script('registerScript', $this->plugin_url . 'assets/js/register.js', ["jquery"], "", true);
     }
+
 
 
     public function register_form()
@@ -106,7 +109,7 @@ class RegisterController extends BaseController
         $message .= "<br/>";
         $message .= "<br/>";
         $message .= "<p>If the merchant won’t accept your international Visa or </p>";
-        $message .= "<p>MasterCard debit card or don't know how to shop online, you can use our BuyForMe service.</p>";
+        $message .= "<p>MasterCard debit card or don't know how to shop online, you can use our Purchase For Me service.</p>";
 
         return $message;
     }

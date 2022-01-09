@@ -1,6 +1,86 @@
-import { activateSpinner, deactivateSpinner } from "./helpers";
+import { hideForm, showPageLoader } from "./helpers";
 (function ($) {
-	$(".add_list_item").click(function () {
+	let quoteForm = $("#smart-quote-form");
+	let message = $("#smart-message-container");
+	let overlay = $(".overlay");
+	let loader = $(".lds-ellipsis");
+
+	function collectData() {
+		let items = 0;
+		$(".list_items").each(function () {
+			items++;
+		});
+
+		var first_name = retrieveFormValues("first_name");
+		var last_name = retrieveFormValues("last_name");
+		var phone = retrieveFormValues("phone");
+		var email = retrieveFormValues("email");
+		var confirm_email = retrieveFormValues("confirm_email");
+		var service = retrieveCheckboxValues_Array("service");
+		var product_name = retrieveFormValues_Array("product_name");
+		var product_link = retrieveFormValues_Array("product_link");
+		var product_option = retrieveFormValues_Array("product_option");
+		var product_quantity = retrieveFormValues_Array("product_quantity");
+		var other_info = retrieveFormValues("other_info");
+		var nonce = retrieveFormValues("nonce");
+		var products = [];
+		for (var i = 0; i < items; i++) {
+			var get_name = product_name[i];
+			var get_link = product_link[i];
+			var get_option = product_option[i];
+			var get_quantity = product_quantity[i];
+
+			let data = {
+				name: get_name,
+				link: get_link,
+				options: get_option,
+				quantity: get_quantity,
+			};
+
+			products.push(data);
+		}
+
+		return {
+			first_name: first_name,
+			last_name: last_name,
+			phone: phone,
+			email: email,
+			confirm_email: confirm_email,
+			service: service,
+			products,
+			other_info: other_info,
+			nonce: nonce,
+			action: "submit_quote",
+		};
+	}
+
+	// Initialize form validation on the registration form.
+	$("#smart-quote-form").validate({
+		// Submit the form
+		submitHandler: function () {
+			const data = collectData();
+			$.ajax({
+				url: quoteForm.data("url"),
+				type: "POST",
+				data: data,
+				beforeSend: function () {
+					showPageLoader(overlay, loader);
+				},
+				success: function (data, status) {
+					if (status !== "success") return;
+					hideForm(quoteForm, overlay, loader, message);
+
+					// hideLoaderShowResponse(overlay, loader);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					//if fails
+					// console.log(errorThrown);
+				},
+			});
+		},
+	});
+
+	$(".add_list_item").on("click", function () {
 		let clone = $("#template").clone(true);
 		clone = clone
 			.removeAttr("id")
@@ -10,82 +90,61 @@ import { activateSpinner, deactivateSpinner } from "./helpers";
 		clone.insertBefore("#template");
 	});
 
-	$(".delete_list_item").click(function () {
+	$(".delete_list_item").on("click", function () {
 		let parent = $(this).parent().parent();
 		let container = $(".list_items");
 		if (container.length === 1) return;
 		parent.remove();
 	});
 
-	$("#submit-quote-form").click(function () {
-		let $btn = $(this);
-		activateSpinner($btn);
-		submit();
-	});
+	$.validator.methods.phone = function (value, element) {
+		return this.optional(element) || /^(\+254-|\+254|0)?\d{10}$/.test(value);
+	};
 
-	function submit() {
-		let items = 0;
-		$.each($("#list_items"), function () {
-			items++;
+	function retrieveFormValues_Array(name) {
+		var value = new Array();
+		var counter = 0;
+
+		$("input[name=" + name + "], select[name=" + name + "]").each(function (
+			i,
+			v
+		) {
+			var theElement = $(v);
+			var theValue = theElement.val();
+			value[counter] = theValue;
+			counter++;
 		});
+		return value;
+	}
 
-		// var issue_date = retrieveFormValues("issue_date");
-		// var location = retrieveFormValues("location");
-		// var voucher = retrieveFormValues("voucher");
+	function retrieveCheckboxValues_Array(name) {
+		var value = new Array();
+		var counter = 0;
 
-		// var vaccines = retrieveFormValues_Array("vaccine");
-		// var batch_no = retrieveFormValues_Array("batch_no");
-		// var expiry_date = retrieveFormValues_Array("expiry_date");
-		// var vvm = retrieveFormValues_Array("vvm");
-		// var quantity = retrieveFormValues_Array("stock_quantity");
-		// var issue_quantity = retrieveFormValues_Array("issue_quantity");
+		$("input[name=" + name + "][type=checkbox]:checked").each(function (i, v) {
+			var theElement = $(v);
+			var theValue = theElement.val();
+			value[counter] = theValue;
+			counter++;
+		});
+		return value;
+	}
 
-		// var dat = new Array();
-
-		// for (var i = 0; i < vaccine_count; i++) {
-		// 	var data = new Array();
-		// 	var get_vaccine = vaccines[i];
-		// 	var get_batch = batch_no[i];
-		// 	var get_expiry = expiry_date[i];
-		// 	var get_issue_quantity = issue_quantity[i];
-		// 	var get_quantity = quantity[i];
-		// 	var get_vvm = vvm[i];
-
-		// 	data = {
-		// 		vaccine_id: get_vaccine,
-		// 		batch_no: get_batch,
-		// 		expiry_date: get_expiry,
-		// 		issue_quantity: get_issue_quantity,
-		// 		quantity: get_quantity,
-		// 		vvm: get_vvm,
-		// 	};
-
-		// 	dat.push(data);
-		// }
-
-		// batch = JSON.stringify(dat);
-		// $.ajax({
-		// 	url: $("#single").attr("action"),
-		// 	type: "POST",
-		// 	data: {
-		// 		issued_to: location,
-		// 		voucher: voucher,
-		// 		issue_date: issue_date,
-		// 		batch: batch,
-		// 	},
-		// 	beforeSend: function () {
-		// 		$("#validate").fadeOut(300, function () {
-		// 			$(this).remove();
-		// 		});
-		// 	},
-
-		// 	success: function (data, textStatus, jqXHR) {
-		// 		console.log(data);
-		// 	},
-
-		// 	error: function (jqXHR, textStatus, errorThrown) {
-		// 		//if fails
-		// 	},
-		// });
+	function retrieveFormValues(name) {
+		var value;
+		$(
+			"input[name=" +
+				name +
+				"], select[name=" +
+				name +
+				"], textarea[name=" +
+				name +
+				"]"
+		).each(function (i, v) {
+			var theElement = $(v);
+			var theValue = theElement.val();
+			value = theValue;
+		});
+		return value;
 	}
 })(jQuery);
