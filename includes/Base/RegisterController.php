@@ -85,7 +85,7 @@ class RegisterController extends BaseController
         if ($result) {
 
             $subject = "New Shipping Address for " . $first_name;
-            $message = $this->generate_message_body($first_name);
+            $message = $this->generate_message_body($first_name, $last_name);
             if ($this->send_mail($email, $subject, $message)) {
                 return $this->return_json("success");
             }
@@ -95,7 +95,7 @@ class RegisterController extends BaseController
         return $this->return_json("error");
     }
 
-    public function generate_message_body($first_name)
+    public function generate_message_body($first_name, $last_name)
     {
 
         $message =  "<h1>Welcome to Smart Delivery</h1>";
@@ -106,7 +106,21 @@ class RegisterController extends BaseController
         $message .= "<p>Simply enter your provided address as your shipping address for us to receive </p>";
         $message .= "<p>your packages and ship them to your doorstep in Kenya.</p>";
         $message .= "<br/>";
+        $message .= "<p><strong>US DELIVERY ADDRESS</strong></p>";
+        $message .= "<p> $first_name $last_name ACG-SD</p>";
+        $message .= "<p> Phone: + 1 302 351 49 71</p>";
+        $message .= "<p> Street name: 5341 W 104TH Street</p>";
+        $message .= "<p> City: Los Angeles</p>";
+        $message .= "<p> State: California</p>";
+        $message .= "<p> Zipcode: CA 90045-6009</p>";
         $message .= "<br/>";
+        $message .= "<p><strong>UK DELIVERY ADDRESS</strong></p>";
+        $message .= "<p> $first_name $last_name ACG-SD</p>";
+        $message .= "<p> Phone: + 1 302 351 49 71</p>";
+        $message .= "<p> Postcode: HA9 0JD</p>";
+        $message .= "<p> Address line 1: Access Business Centre </p>";
+        $message .= "<p> Address line 2: First Way </p>";
+        $message .= "<p> Town/City: Wembley</p>";
         $message .= "<br/>";
         $message .= "<p>If the merchant won’t accept your international Visa or </p>";
         $message .= "<p>MasterCard debit card or don't know how to shop online, you can use our Purchase For Me service.</p>";
