@@ -32,6 +32,7 @@ class BaseController
 			"register_form" => "Activate Registration Form",
 			"quote_form" => "Activate Quote Form",
 			"rate_table" => "Activate Rate Table",
+			"landing_page" => "Activate Landing Page",
 		];
 	}
 

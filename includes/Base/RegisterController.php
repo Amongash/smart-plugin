@@ -9,11 +9,20 @@ namespace Includes\Base;
 use Includes\Base\BaseController;
 
 define('ACCOUNTS', 'shipping_accounts');
-
 class RegisterController extends BaseController
 {
+    private function shipping_accounts()
+    {
+        global $wpdb;
+        return $wpdb->base_prefix . ACCOUNTS;
+    }
 
-    public $shipping_accounts;
+    function wpdb()
+    {
+        global $wpdb;
+        return $wpdb;
+    }
+
 
     public function register()
     {
@@ -34,9 +43,6 @@ class RegisterController extends BaseController
 
         wp_enqueue_style('frontendStyle', $this->plugin_url . 'assets/css/frontend.css');
         wp_enqueue_style('registerStyle', $this->plugin_url . 'assets/css/register.css');
-        wp_enqueue_script('jquery-validation-plugin', "https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js", ["jquery"]);
-        wp_enqueue_script('helperScript', $this->plugin_url . 'assets/js/helpers.js', ["jquery"], "", true);
-        wp_enqueue_script('registerScript', $this->plugin_url . 'assets/js/register.js', ["jquery"], "", true);
     }
 
 
@@ -54,19 +60,53 @@ class RegisterController extends BaseController
         $table = $wpdb->base_prefix . ACCOUNTS;
 
         if (!DOING_AJAX || !check_ajax_referer("register-nonce", "register-nonce")) {
-            return $this->return_json("error");
+            return wp_send_json([
+                "message" => "Invalid nonce provided. Please refresh your page and try again,",
+                "success" => false
+            ]);
         }
 
-        $first_name = sanitize_text_field($_POST["first_name"]);
-        $last_name = sanitize_text_field($_POST["last_name"]);
-        $phone = $this->normalizeTelephoneNumber($_POST["phone"]);
-        $email = sanitize_email($_POST["email"]);
-        $gender = filter_var($_POST["gender"], FILTER_SANITIZE_STRING);
+        $data = $this->validate_data($_POST);
+
+        $result = $wpdb->insert($table, $data);
+
+
+        if ($result) {
+
+            $subject = "New Shipping Address for " . $data['first_name'];
+            $message = $this->generate_message_body($data['first_name'], $data['last_name']);
+            if ($this->send_mail($data['email'], $subject, $message)) {
+                wp_send_json([
+                    "message" => "Registration successful.",
+                    "success" => true
+                ]);
+            }
+        }
+        wp_send_json([
+            "data" => $data,
+            "message" => "An error occurred. Please try again.",
+            "success" => false
+        ], 400);
+    }
+
+    private function validate_data($array)
+    {
+        // Check if email address exists in our database table
+        $exists = $this->wpdb()->get_row("Select email from " . $this->shipping_accounts() . " where email =  '" . $array['email'] . "'");
+        if ($exists) {
+            wp_send_json(["message" => "The email provided is already in use. Please check your inbox.", "success" => false], 400);
+        }
+
+        $first_name = sanitize_text_field($array["first_name"]);
+        $last_name = sanitize_text_field($array["last_name"]);
+        $phone = $this->normalizeTelephoneNumber($array["phone"]);
+        $email = sanitize_email($array["email"]);
+        $gender = filter_var($array["gender"], FILTER_SANITIZE_STRING);
         $gender = $gender === "male" ? 'M' : 'F';
-        $agreement = filter_var($_POST["agreement"], FILTER_SANITIZE_STRING);
+        $agreement = filter_var($array["agreement"], FILTER_SANITIZE_STRING);
         $agreement = $agreement === "on" ? true : false;
 
-        $data = [
+        return [
             "first_name" => $first_name,
             "last_name" => $last_name,
             "email" => $email,
@@ -74,25 +114,6 @@ class RegisterController extends BaseController
             "gender" => $gender,
             "agreement" => $agreement,
         ];
-
-        $exists = $wpdb->get_row("Select * from $table where email = '$email'");
-        if ($exists) {
-            return $this->return_json("This email is in use. Please check your inbox.");
-        }
-
-        $result = $wpdb->insert($table, $data);
-
-        if ($result) {
-
-            $subject = "New Shipping Address for " . $first_name;
-            $message = $this->generate_message_body($first_name, $last_name);
-            if ($this->send_mail($email, $subject, $message)) {
-                return $this->return_json("success");
-            }
-            return $this->return_json("Unable to send email.");
-        }
-
-        return $this->return_json("error");
     }
 
     public function generate_message_body($first_name, $last_name)
@@ -109,10 +130,10 @@ class RegisterController extends BaseController
         $message .= "<p><strong>US DELIVERY ADDRESS</strong></p>";
         $message .= "<p> $first_name $last_name ACG-SD</p>";
         $message .= "<p> Phone: + 1 302 351 49 71</p>";
-        $message .= "<p> Street name: 5341 W 104TH Street</p>";
-        $message .= "<p> City: Los Angeles</p>";
+        $message .= "<p> Street Address: 17401 Nichols LN Unit J</p>";
+        $message .= "<p> City:  Huntington Beach</p>";
         $message .= "<p> State: California</p>";
-        $message .= "<p> Zipcode: CA 90045-6009</p>";
+        $message .= "<p> Zipcode: 92647</p>";
         $message .= "<br/>";
         $message .= "<p><strong>UK DELIVERY ADDRESS</strong></p>";
         $message .= "<p> $first_name $last_name ACG-SD</p>";
@@ -128,14 +149,6 @@ class RegisterController extends BaseController
         return $message;
     }
 
-    public function return_json($status)
-    {
-        $return = [
-            "status" => $status,
-        ];
-        wp_send_json($return);
-        wp_die();
-    }
 
     public function normalizeTelephoneNumber(string $telephone)
     {

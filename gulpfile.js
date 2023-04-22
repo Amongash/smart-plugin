@@ -2,65 +2,68 @@
 const { src, dest, task, watch, series, parallel } = require("gulp");
 
 // CSS related plugins
-var sass = require("gulp-sass");
-var autoprefixer = require("gulp-autoprefixer");
+const sass = require("gulp-sass")(require("sass"));
+const autoprefixer = require("gulp-autoprefixer");
 
 // JS related plugins
-var uglify = require("gulp-uglify");
-var babelify = require("babelify");
-var browserify = require("browserify");
-var source = require("vinyl-source-stream");
-var buffer = require("vinyl-buffer");
-var stripDebug = require("gulp-strip-debug");
+const uglify = require("gulp-uglify");
+const babelify = require("babelify");
+const browserify = require("browserify");
+const source = require("vinyl-source-stream");
+const buffer = require("vinyl-buffer");
+const stripDebug = require("gulp-strip-debug");
 
 // Utility plugins
-var rename = require("gulp-rename");
-var sourcemaps = require("gulp-sourcemaps");
-var notify = require("gulp-notify");
-var plumber = require("gulp-plumber");
-var options = require("gulp-options");
-var gulpif = require("gulp-if");
+const rename = require("gulp-rename");
+const sourcemaps = require("gulp-sourcemaps");
+const notify = require("gulp-notify");
+const plumber = require("gulp-plumber");
+const options = require("gulp-options");
+const gulpif = require("gulp-if");
 
 // Browers related plugins
-var browserSync = require("browser-sync").create();
+const browserSync = require("browser-sync").create();
 
-// Project related variables
-var projectURL = "http://wordpress.local/";
+// Project related constiables
+const projectURL = "http://smartdelivery.local/";
 
-var styleSRC = "./src/scss/style.scss";
-var styleForm = "./src/scss/form.scss";
-var styleQuote = "./src/scss/quote.scss";
-var styleSpinner = "./src/scss/spinner.scss";
-var styleRegister = "./src/scss/register.scss";
-var styleAuth = "./src/scss/auth.scss";
-var styleSlider = "./src/scss/slider.scss";
-var styleFrontend = "./src/scss/frontend.scss";
-var styleRates = "./src/scss/rates.scss";
-var styleURL = "./assets/css/";
-var mapURL = "./";
+const styleSRC = "./src/scss/style.scss";
+const styleForm = "./src/scss/form.scss";
+const styleQuote = "./src/scss/quote.scss";
+const styleSpinner = "./src/scss/spinner.scss";
+const styleRegister = "./src/scss/register.scss";
+const styleAuth = "./src/scss/auth.scss";
+const styleSlider = "./src/scss/slider.scss";
+const styleFrontend = "./src/scss/frontend.scss";
+const styleRates = "./src/scss/rates.scss";
+const styleLanding = "./src/scss/landing.scss";
+const styleURL = "./assets/css/";
+const mapURL = "./";
 
-var jsSRC = "./src/js/";
-var jsAdmin = "script.js";
-var jsForm = "form.js";
-var jsQuote = "quote.js";
-var jsRegister = "register.js";
-var jsAuth = "auth.js";
-var jsSlider = "slider.js";
-var jsHelpers = "helpers.js";
-var jsFiles = [
+const jsSRC = "./src/js/";
+const jsAdmin = "script.js";
+const jsForm = "form.js";
+const jsQuote = "quote.js";
+const jsRegister = "register.js";
+const jsAuth = "auth.js";
+const jsSlider = "slider.js";
+const jsLanding = "landing.js";
+const jsHelpers = "helpers.js";
+const jsFiles = [
 	jsAdmin,
 	jsForm,
 	jsSlider,
+	jsLanding,
 	jsAuth,
 	jsRegister,
 	jsQuote,
 	jsHelpers,
 ];
-var jsURL = "./assets/js/";
+const jsURL = "./assets/js/";
 
-var styleWatch = "./src/scss/**/*.scss";
-var jsWatch = "./src/js/**/*.js";
-var phpWatch = "./**/*.php";
+const styleWatch = "./src/scss/**/*.scss";
+const jsWatch = "./src/js/**/*.js";
+const phpWatch = "./**/*.php";
 
 // Tasks
 function browser_sync(done) {
@@ -83,6 +86,7 @@ function style(done) {
 		styleAuth,
 		styleFrontend,
 		styleRates,
+		styleLanding,
 	])
 		.pipe(sourcemaps.init())
 		.pipe(
