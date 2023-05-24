@@ -1,15 +1,44 @@
 document.addEventListener("DOMContentLoaded", function (e) {
+	console.log("Script loaded successfully");
 	// Get the modal
-	let modal = document.getElementById("modal");
+	const modal = document.getElementById("modal");
 
 	// Get the button that opens the modal
-	let btn = document.getElementById("get-started-button");
+	const getStartedBtn = document.getElementById("get-started-button");
+
+	// Get the next button
+	const nextBtn = document.getElementById("next-btn");
+
+	// Get the message button
+	const messageBtn = document.getElementById("message-btn");
 
 	// Get the <span> element that closes the modal
-	let span = document.getElementById("close-modal");
+	const span = document.getElementById("close-modal");
+
+	// Get the message form
+	const messageForm = document.getElementById("send-message-form");
+
+	// Get the start shipping form
+	const shippingForm = document.getElementById("start-shipping-form");
+
+	// Get the success message form
+	const successMessageForm = document.getElementById("success-message-form");
+
+	// When the user clicks on the next button, display the message form
+	nextBtn.addEventListener("click", () => {
+		// Get the forms and change display styling
+		shippingForm.style.display = "none";
+		successMessageForm.style.display = "block";
+	});
+
+	messageBtn.addEventListener("click", () => {
+		const baseURL = window.location.origin; // Get the base URL
+		const contactURL = new URL("contact", baseURL); // Construct the new URL
+		window.location.href = contactURL.href;
+	});
 
 	// When the user clicks on the button, open the modal
-	btn.onclick = function () {
+	getStartedBtn.onclick = function () {
 		modal.style.display = "flex";
 	};
 
@@ -25,12 +54,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
 		}
 	};
 
-	const submitBtn = document.getElementById("email-submit");
-
-	submitBtn.addEventListener("click", (event) => {
-		event.preventDefault(); // prevent default form submission
-		console.log("Submit button clicked");
-	});
+	// When the user clicks on the "next" button, display the form
+	nextBtn.onclick = function () {
+		modal.style.display = "flex";
+	};
 
 	const emailInput = document.getElementById("email");
 	const emailError = document.getElementById("email-error");

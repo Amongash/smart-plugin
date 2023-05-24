@@ -18,9 +18,9 @@ class LandingController extends BaseController
 	public function register()
     {
 
-        if (!$this->activated("landing_page")) {
-            return;
-        }
+        // if (!$this->activated("landing_page")) {
+        //     return;
+        // }
         add_shortcode("landing-page", [$this, "landing_page"]);
         // add_action("wp_ajax_submit_register", [$this, "submit_register"]);
         // add_action("wp_ajax_nopriv_submit_register", [$this, "submit_register"]);

@@ -29,6 +29,7 @@ final class Init
 			Base\RegisterController::class,
 			Base\QuoteController::class,
 			Base\RateController::class,
+			Base\LandingController::class,
 		];
 	}
 
